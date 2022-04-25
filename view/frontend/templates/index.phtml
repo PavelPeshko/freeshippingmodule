@@ -1,0 +1,113 @@
+<?php
+/** @var $block \Peshko\ShippingBar\Block\DisplayText */
+?>
+<?php
+$isModuleActive = $block->getConfigurationData('enable');
+$shippingText = $block->getConfigurationData('shipping_text');
+$textPosition = $block->getConfigurationData('text_position');
+$textFontSize = $block->getConfigurationData('text_font_size');
+$textFontFamily = $block->getConfigurationData('text_font_family');
+$textColor = $block->getConfigurationData('text_color');
+$textBackgroundColor = $block->getConfigurationData('text_background_color');
+$isGoal = $block->getConfigurationData('aim');
+if ($isModuleActive == 1) {
+    ?>
+    <div id="announcement-text"><?= strip_tags($shippingText); ?></div>
+    <?php
+    if ($textPosition == 'header') {
+        ?>
+        <style>
+            .page-wrapper {
+                padding-top: 40px;
+            }
+
+            div#announcement-text {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                font-size: <?= $textFontSize?>;
+                font-family: <?= $textFontFamily?>;
+                color: <?= $textColor; ?>;
+                background: <?= $textBackgroundColor; ?>;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                z-index: 999;
+                box-sizing: border-box;
+            }
+        </style>
+        <?php
+    } else if ($textPosition == 'header_fixed') {
+        ?>
+        <style>
+            .page-wrapper {
+                padding-top: 40px;
+            }
+
+            div#announcement-text {
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                font-size: <?= $textFontSize?>;
+                font-family: <?= $textFontFamily?>;
+                color: <?= $textColor; ?>;
+                background: <?= $textBackgroundColor; ?>;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                z-index: 999;
+                box-sizing: border-box;
+            }
+        </style>
+        <?php
+    } else if ($textPosition == 'footer') {
+        ?>
+        <style>
+            .page-wrapper {
+                padding-bottom: 40px;
+            }
+
+            div#announcement-text {
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                font-size: <?= $textFontSize?>;
+                font-family: <?= $textFontFamily?>;
+                color: <?= $textColor; ?>;
+                background: <?= $textBackgroundColor; ?>;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                z-index: 999;
+                box-sizing: border-box;
+            }
+        </style>
+        <?php
+    } else if ($textPosition == 'footer_fixed') {
+        ?>
+        <style>
+            .page-wrapper {
+                padding-bottom: 40px;
+            }
+
+            div#announcement-text {
+                position: fixed;
+                bottom: 0px;
+                left: 0px;
+                font-size: <?= $textFontSize?>;
+                font-family: <?= $textFontFamily?>;
+                color: <?= $textColor; ?>;
+                background: <?= $textBackgroundColor; ?>;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                z-index: 999;
+                box-sizing: border-box;
+            }
+        </style>
+        <?php
+    }
+}
+
+
+?>
