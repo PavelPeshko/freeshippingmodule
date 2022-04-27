@@ -10,9 +10,112 @@ $textFontFamily = $block->getConfigurationData('text_font_family');
 $textColor = $block->getConfigurationData('text_color');
 $textBackgroundColor = $block->getConfigurationData('text_background_color');
 $isGoal = $block->getConfigurationData('aim');
-if ($isModuleActive == 1) {
+$aimText = $block->getConfigurationData('aim_text');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+$cart = $objectManager->get('Magento\Checkout\Model\Session');
+$subTotal = $cart->getQuote()->getSubtotal();
+$grandTotal = $cart->getQuote()->getGrandTotal();
+if ($isModuleActive == 1 && $isGoal > $subTotal) {
     ?>
     <div id="announcement-text"><?= strip_tags($shippingText); ?></div>
+    <?php
+    if ($textPosition == 'header') {
+        ?>
+        <style>
+            .page-wrapper {
+                padding-top: 40px;
+            }
+
+            div#announcement-text {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                font-size: <?= $textFontSize?>;
+                font-family: <?= $textFontFamily?>;
+                color: <?= $textColor; ?>;
+                background: <?= $textBackgroundColor; ?>;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                z-index: 999;
+                box-sizing: border-box;
+            }
+        </style>
+        <?php
+    } else if ($textPosition == 'header_fixed') {
+        ?>
+        <style>
+            .page-wrapper {
+                padding-top: 40px;
+            }
+
+            div#announcement-text {
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                font-size: <?= $textFontSize?>;
+                font-family: <?= $textFontFamily?>;
+                color: <?= $textColor; ?>;
+                background: <?= $textBackgroundColor; ?>;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                z-index: 999;
+                box-sizing: border-box;
+            }
+        </style>
+        <?php
+    } else if ($textPosition == 'footer') {
+        ?>
+        <style>
+            .page-wrapper {
+                padding-bottom: 40px;
+            }
+
+            div#announcement-text {
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                font-size: <?= $textFontSize?>;
+                font-family: <?= $textFontFamily?>;
+                color: <?= $textColor; ?>;
+                background: <?= $textBackgroundColor; ?>;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                z-index: 999;
+                box-sizing: border-box;
+            }
+        </style>
+        <?php
+    } else if ($textPosition == 'footer_fixed') {
+        ?>
+        <style>
+            .page-wrapper {
+                padding-bottom: 40px;
+            }
+
+            div#announcement-text {
+                position: fixed;
+                bottom: 0px;
+                left: 0px;
+                font-size: <?= $textFontSize?>;
+                font-family: <?= $textFontFamily?>;
+                color: <?= $textColor; ?>;
+                background: <?= $textBackgroundColor; ?>;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                z-index: 999;
+                box-sizing: border-box;
+            }
+        </style>
+        <?php
+    }
+}elseif ($isModuleActive == 1 && $isGoal <= $subTotal) {
+    ?>
+    <div id="announcement-text"><?= strip_tags($aimText); ?></div>
     <?php
     if ($textPosition == 'header') {
         ?>
